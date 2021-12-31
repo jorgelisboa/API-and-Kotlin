@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">CountryApp</string>
+    <string name="str_tv_title">POPULAÇÃO DOS ESTADOS AMERICANOS</string>
+    <string name="str_filtrar">Filtrar</string>
+    <string name="str_country">Alabama</string>
+    <string name="str_number">4.903.185</string>
+    <string name="str_id">ID</string>
+    <string name="hint_id">04000US02</string>
+    <string name="txt_edit">Editar dados de:</string>
+    <string name="str_state">Estado</string>
+    <string name="str__year">Ano</string>
+    <string name="str_population">População</string>
+    <string name="str_slug">Slug</string>
+    <string name="hint_year">2019</string>
+    <string name="hint_state">Alaska</string>
+    <string name="hint_population">População</string>
+    <string name="hint_slug">2019</string>
+    <string name="btn_save">Salvar</string>
 </resources>
