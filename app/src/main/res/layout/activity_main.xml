@@ -52,4 +52,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfLayout"
         tools:listitem="@layout/item_country" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

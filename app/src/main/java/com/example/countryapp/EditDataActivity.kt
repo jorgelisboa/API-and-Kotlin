@@ -12,7 +12,7 @@ import com.example.countryapp.databinding.ActivityMainBinding
 
 class EditDataActivity : AppCompatActivity() {
     private val db = SQLite(this)
-    var country = DataModel()
+    private var country = DataModel()
     private lateinit var binding: ActivityEditDataBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +21,10 @@ class EditDataActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Get the Intent that started this activity and extract the string
-        val position = intent.getIntExtra("posicaoValor", 1)
-        getCountryData(position)
+        val position = intent.getStringExtra("posicaoValor")
+        if (position != null) {
+            getCountryData(position)
+        }
 
         binding.btnSalvar.setOnClickListener {
             updateData()
@@ -30,24 +32,25 @@ class EditDataActivity : AppCompatActivity() {
     }
 
     private fun updateData() {
-        binding.tfAno.text
-        binding.tfEstado.text
-        binding.tfId.text
-        binding.tfPopulacao.text
-        binding.tfSlug.text
-
+        //Get new object
+        country.Year = binding.tfAno.text.toString()
+        country.State = binding.tfEstado.text.toString()
+        country.IDState = binding.tfId.text.toString()
+        country.Population = binding.tfPopulacao.text.toString()
+        country.SlugState = binding.tfSlug.text.toString()
+        //Insert new object
+        db.updateCountryData(country)
         startActivity(Intent(this, MainActivity::class.java))
     }
 
-    private fun getCountryData(position: Int) {
-        Log.d("JOJI", "String: $position")
+    private fun getCountryData(position: String) {
         var selectedCountry: DataModel = db.showSelectedCountry(country, position)
+        country.IDYear = selectedCountry.IDYear.toString()
         binding.tfAno.setText(selectedCountry.Year.toString())
         binding.tfEstado.setText(selectedCountry.State.toString())
         binding.tfId.setText(selectedCountry.IDState.toString())
         binding.tfPopulacao.setText(selectedCountry.Population.toString())
         binding.tfSlug.setText(selectedCountry.SlugState.toString())
     }
-
 
 }

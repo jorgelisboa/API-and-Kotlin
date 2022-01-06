@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
 import android.util.Log
 import com.example.countryapp.data.api.DataModel
 
@@ -76,12 +75,12 @@ class SQLite (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null,
         var completeList: MutableList<String> = ArrayList()
 
         //Using cursor to store select
-        var c: Cursor = db.rawQuery("SELECT * FROM ${TABLE_NAME};", arrayOf<String>())
+        var c: Cursor = db.rawQuery("SELECT * FROM $TABLE_NAME;", arrayOf<String>())
         if(c.moveToFirst())
         {
             do {
                 //Put the String in the ListView
-                var content = c.getString(3) + "\n" +c.getString(5)
+                var content = c.getString(3) + " " +c.getString(5)
                 //Add in the list
                 completeList.add(content)
             } while (c.moveToNext())
@@ -91,26 +90,48 @@ class SQLite (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null,
         return completeList
     }
 
-    fun showSelectedCountry(country: DataModel, posicao: Int) : DataModel {
+    fun deleteSelectedCountry(countryName: String) {
         val db = writableDatabase //Open the connection
-        Log.d("JOJI", "String: $posicao")
-        //Using cursor to store select
-        val c = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE _id = ?;", arrayOf(posicao.toString()))
+        //SQL Statement
+        db.delete(TABLE_NAME, "$COLUMN_NAME_STATE=?", arrayOf(countryName))
+        db.close()
+    }
+
+    fun updateCountryData(country: DataModel) {
+        val db = writableDatabase
+        val contentValues = ContentValues()
+
+        contentValues.put(COLUMN_NAME_ID, country.IDState)
+        contentValues.put(COLUMN_NAME_ID_YEAR, country.IDYear)
+        contentValues.put(COLUMN_NAME_STATE, country.State)
+        contentValues.put(COLUMN_NAME_POPULATION, country.Population)
+        contentValues.put(COLUMN_NAME_YEAR, country.Year)
+        contentValues.put(COLUMN_NAME_SLUG, country.SlugState)
+
+
+        db.update(TABLE_NAME, contentValues, "$COLUMN_NAME_ID = ?", arrayOf(country.IDState))
+    }
+
+    fun showSelectedCountry(country: DataModel, state: String) : DataModel {
+        val db = readableDatabase //Open the connection
+
+
+        val c = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COLUMN_NAME_STATE = ?;", arrayOf(state))
+
         if (c.moveToFirst()) {
             do {
                 country.IDState = c.getString(1)
+                country.IDYear = c.getString(2)
                 country.State = c.getString(3)
                 country.Year = c.getString(4)
                 country.Population = c.getString(5)
                 country.SlugState = c.getString(6)
-
             } while (c.moveToNext())
         }
         db.close()
         //Return
         return country
     }
-
 
     companion object {
         // If you change the database schema, you must increment the database version.
