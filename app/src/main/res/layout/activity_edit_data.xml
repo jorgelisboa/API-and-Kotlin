@@ -46,7 +46,8 @@
             android:id="@+id/tf_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_id" />
+            android:hint="@string/hint_id"
+            tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -112,11 +113,13 @@
             android:id="@+id/tf_estado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_state" />
+            android:hint="@string/hint_state"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/tlAno"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -130,12 +133,13 @@
             android:id="@+id/tf_ano"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_year" />
+            android:hint="@string/hint_year"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="odp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -148,7 +152,8 @@
             android:id="@+id/tf_populacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_population" />
+            android:hint="@string/hint_population"
+            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -166,7 +171,8 @@
             android:id="@+id/tf_slug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_slug" />
+            android:hint="@string/hint_slug"
+            tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
